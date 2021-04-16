@@ -1,0 +1,29 @@
+<!--viewsフォルダ内のファイルは、クライアントに生成されるウェブページをhtml形式で記述します。-->
+
+<div class="list-wrap">
+<% @lists.each do |list| %>
+  <div class="list-box">
+    <%= attachment_image_tag list, :image, :fill, 200, 200, format: 'jpeg' %>
+    <div class="list-comment">
+      <span class="list-body"><%= list.body %></span>
+      <span class="list-title"><%=link_to list.title, todolist_path(list.id) %></span>
+    </div>
+  </div>
+<% end %>
+</div>
+
+<h1>投稿一覧</h1>
+<% @lists.each do |list| %>
+<!--eachメソッド=eachの箇所では、<!% %>に「=が付かない」
+@lists.eachと記述することで、Listレコードの数だけ繰り返し処理-->
+  <p>タイトル</p>
+
+  <span>
+    <%= link_to list.title, todolist_path(list.id) %>
+    <!--link_toメソッドは、HTMLの要素を出力するメソッド-->
+    <!--list.titleと記述することで、投稿のタイトルが表示されます。-->
+  </span>
+  <p>画像</p>
+  <%= attachment_image_tag list, :image, format: 'jpeg', size: "100x100" %>
+
+<% end %>
